@@ -26,6 +26,7 @@ cmp.setup({
         {
             name = "env",
             option = {
+                eval_on_confirm = false,
                 show_documentation_window = true,
                 item_kind = cmp.lsp.CompletionItemKind.Variable
             },
@@ -33,6 +34,14 @@ cmp.setup({
     },
 })
 ```
+
+### eval_on_confirm (type: boolean)
+
+_Default:_ `false`
+
+Specify whether a confirmed entry should insert the evaluated environment
+variable rather than the environment variable itself. For example, if you
+confirm `$SHELL`, it might insert `/bin/bash`.
 
 ### show_documentation_window (type: boolean)
 

@@ -35,15 +35,22 @@ local function setup_completion_items(params)
 
 		-- If show_documentation_window is set to false,
 		-- do not add documentation table inside completion_items
-		if opts.show_documentation_window == false then
-			documentation = nil
-		else
+		if opts.show_documentation_window then
 			documentation = setup_documentation_for_item(key, value)
+		else
+			documentation = nil
+		end
+		-- If eval_on_confirm is set to true,
+		-- use `value` instead of `key` upon completion
+		if opts.eval_on_confirm then
+			insertText = value
+		else
+			insertText = key
 		end
 
 		table.insert(completion_items, {
 			label = key,
-			insertText = value,
+			insertText = insertText,
 			word = key,
 			documentation = documentation,
 			kind = item_kind,
