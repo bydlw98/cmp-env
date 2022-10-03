@@ -8,7 +8,7 @@ local completion_items = {}
 local function setup_documentation_for_item(key, value)
 	return {
 		kind = "markdown",
-		value = "```sh\n" .. key .. "\n\n" .. value .. "\n```",
+		value = "```sh\n" .. value .. "\n```",
 	}
 end
 
@@ -36,17 +36,18 @@ local function setup_completion_items(params)
 		-- If show_documentation_window is set to false,
 		-- do not add documentation table inside completion_items
 		if opts.show_documentation_window == false then
-			table.insert(completion_items, {
-				label = key,
-				kind = item_kind,
-			})
+			documentation = nil
 		else
-			table.insert(completion_items, {
-				label = key,
-				documentation = setup_documentation_for_item(key, value),
-				kind = item_kind,
-			})
+			documentation = setup_documentation_for_item(key, value)
 		end
+
+		table.insert(completion_items, {
+			label = key,
+			insertText = value,
+			word = key,
+			documentation = documentation,
+			kind = item_kind,
+		})
 	end
 end
 
