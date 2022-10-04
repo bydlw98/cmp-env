@@ -33,26 +33,14 @@ local function setup_completion_items(params)
 		-- eg. PATH -> $PATH
 		key = "$" .. key
 
-		-- If show_documentation_window is set to false,
-		-- do not add documentation table inside completion_items
-		if opts.show_documentation_window then
-			documentation = setup_documentation_for_item(key, value)
-		else
-			documentation = nil
-		end
-		-- If eval_on_confirm is set to true,
-		-- use `value` instead of `key` upon completion
-		if opts.eval_on_confirm then
-			insertText = value
-		else
-			insertText = key
-		end
-
 		table.insert(completion_items, {
 			label = key,
-			insertText = insertText,
+			-- Evaluate the environment variable if `eval_on_confirm` is true
+			insertText = opts.eval_on_confirm and value or key,
 			word = key,
-			documentation = documentation,
+			-- Show documentation if `show_documentation_window` is true
+			documentation = opts.show_documentation_window and
+				setup_documentation_for_item(key, value),
 			kind = item_kind,
 		})
 	end
