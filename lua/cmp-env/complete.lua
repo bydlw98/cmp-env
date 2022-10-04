@@ -19,15 +19,6 @@ local function setup_completion_items(params)
 	-- Get a dictionary with environment variables and their respective values
 	local env_vars = vim.fn.environ()
 
-	-- Set default item_kind as cmp.lsp.CompletionItemKind.Variable
-	local item_kind = cmp.lsp.CompletionItemKind.Variable
-
-	-- If item_kind option is set, use the value set
-	-- else use default value of cmp.lsp.CompletionItemKind.Variable
-	if opts.item_kind ~= item_kind then
-		item_kind = opts.item_kind
-	end
-
 	for key, value in pairs(env_vars) do
 		-- Prepend $ to key.
 		-- eg. PATH -> $PATH
@@ -41,7 +32,7 @@ local function setup_completion_items(params)
 			-- Show documentation if `show_documentation_window` is true
 			documentation = opts.show_documentation_window and
 				setup_documentation_for_item(key, value),
-			kind = item_kind,
+			kind = opts.item_kind,
 		})
 	end
 end
