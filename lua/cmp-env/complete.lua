@@ -20,9 +20,9 @@ local function setup_completion_items(params)
 	local env_vars = vim.fn.environ()
 
 	for key, value in pairs(env_vars) do
-		-- Prepend $ to key.
-		-- eg. PATH -> $PATH
-		key = "$" .. key
+		-- Prepend $ to key, also surround in braces if `show_braces` is true
+		-- e.g. PATH -> $PATH -> ${PATH}
+		key = "$" .. (opts.show_braces and "{" .. key .. "}" or key)
 
 		table.insert(completion_items, {
 			label = key,
