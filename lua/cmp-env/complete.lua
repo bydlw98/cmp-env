@@ -38,9 +38,9 @@ local function setup_completion_items(params)
 end
 
 return function(self, params, callback)
-	-- When first runned, cached_results will be false
+	-- When first ran, cached_results will be false
 	-- thus setup completion_items so that it does not have to be setup again
-	-- After the first time, there is no need to setup completion_items agains
+	-- After the first time, there is no need to setup completion_items again
 	-- as the environments variables would unlikely be changed and the cached
 	-- completion_items is reused
 	if cached_results == false then
