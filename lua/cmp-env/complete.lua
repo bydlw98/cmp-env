@@ -1,11 +1,10 @@
-local cmp = require("cmp")
 local options = require("cmp-env.options")
 
 local cached_results = false
 
 local completion_items = {}
 
-local function setup_documentation_for_item(key, value)
+local function setup_documentation_for_item(_, value)
 	return {
 		kind = "markdown",
 		value = "```sh\n" .. value .. "\n```",
