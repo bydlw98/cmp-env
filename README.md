@@ -2,10 +2,6 @@
 
 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp) source for environment variables.<br><br>
 
-## Requirements
-
-* [`nvim-lua/plenary.nvim`](https://github.com/nvim-lua/plenary.nvim)
-
 ## Setup
 
 ```lua
